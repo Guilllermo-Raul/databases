@@ -1,0 +1,91 @@
+
+	<style type="text/css">
+			@font-face{
+			font-family: "titulos";
+			src: url(../fonts/CaviarDreams.ttf) format("truetype");
+			}
+
+			#video_background{
+			position: absolute;
+			bottom: 0px;
+			min-width: 100%;
+			min-height: 100%;
+			width: 100%;
+			height: 100%;
+			z-index: -1000;
+			overflow: hidden;
+                background: rgba(82,82,82, 0.9);
+			background-attachment: fixed; 
+			background-repeat: no-repeat; 
+			background-position: center center;
+			}
+			#video_patern{
+				background: #fff;
+				position: fixed;
+				opacity: 0.8;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+			}
+
+		@media (max-width: 800px){
+			body{
+				background-image: url(../img/panoramica.jpg);
+				background-attachment: fixed; 
+				background-repeat: no-repeat; 
+				background-position: center center;
+		}
+			#video_background{
+				display: none;
+			}
+			#video_patern{
+				display: none;
+			}
+		}
+
+
+		.fondo_resolucion_alta{
+			padding: 20px;
+			margin-top: 30px;
+			border-radius: 7px;
+			opacity: 0.8;
+			background-attachment: fixed; 
+			background-repeat: no-repeat; 
+			background-position: center center;
+		}
+
+		.panel-title{
+			background: rgba(1, 19, 43, 8);
+			padding: 15px;
+			color: white;
+			font-family: titulos;
+			
+		}
+
+		.btn_inicio{
+			background: #922B21;
+			border-radius: 5px;
+			padding: 5px;
+			height: 40px;
+			color: white;
+		}
+		.btn_inicio:hover{
+			text-decoration: none;
+			background: #0B5345;
+			color: white;
+		}
+		.registro{
+			color: white;
+			font-family: sans-serif;
+		}
+		#registro{
+			text-decoration: none;
+			color: #f8d946;
+		}
+        #contenedor{
+            background: rgba(82,82,82, 0.3);
+			
+        }
+	</style>
