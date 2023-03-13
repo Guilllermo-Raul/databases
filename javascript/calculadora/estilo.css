@@ -1,0 +1,10 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+input{
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+}
