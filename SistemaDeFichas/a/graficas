@@ -1,0 +1,158 @@
+
+   <?php
+    $host="localhost";
+    $usuario="root";
+    $contrasena="";
+    $base="itic";
+$conexion=new mysqli($host, $usuario, $contrasena, $base);
+if($conexion->connect_errno)
+{
+    die("fallo la conexion:(".$conexion->mysqli_connect_errno().")".$conexion->mysqli_connect_error());
+}
+echo "<meta charset='utf-8'>";
+
+header('Content-Type: text/html; charset=utf-8');
+//consultas  a la base de datos
+$resTotal=$conexion->query("SELECT * FROM alumnos");
+$cnt=$resTotal->num_rows;
+
+$resA1=$conexion->query("SELECT * FROM alumnos where grupo='A100'");
+$cntA1=$resA1->num_rows;
+$totalA1=$cntA1*100/$cnt;
+
+$resA2=$conexion->query("SELECT * FROM alumnos where grupo='A200'");
+$cntA2=$resA2->num_rows;
+$totalA2=$cntA2*100/$cnt;
+
+$resB1=$conexion->query("SELECT * FROM alumnos where grupo='B100'");
+$cntB1=$resB1->num_rows;
+$totalB1=$cntB1*100/$cnt;
+
+$resB2=$conexion->query("SELECT * FROM alumnos where grupo='B200'");
+$cntB2=$resB2->num_rows;
+$totalB2=$cntB2*100/$cnt;
+
+$resC1=$conexion->query("SELECT * FROM alumnos where grupo='C100'");
+$cntC1=$resC1->num_rows;
+$totalC1=$cntC1*100/$cnt;
+
+$resC2=$conexion->query("SELECT * FROM alumnos where grupo='C100'");
+$cntC2=$resC2->num_rows;
+$totalC2=$cntC2*100/$cnt;
+
+
+
+echo "<meta charset='utf-8'>";
+header('Content-Type: text/html; charset=utf-8');
+
+while($filaA1=$resA1->fetch_array(MYSQLI_BOTH)){
+    $A1="{ name:'".$filaA1['grupo']."', y:".$totalA1."},";
+}
+while($filaA2=$resA2->fetch_array(MYSQLI_BOTH)){
+    $A2="{ name:'".$filaA2['grupo']."', y:".$totalA2."},";
+}
+
+while($filaB1=$resB1->fetch_array(MYSQLI_BOTH)){
+    $B1="{ name:'".$filaB1['grupo']."', y:".$totalB1."},";
+}
+
+while($filaB2=$resB2->fetch_array(MYSQLI_BOTH)){
+    $B2="{ name:'".$filaB2['grupo']."', y:".$totalB2."},";
+}
+
+while($filaC1=$resC1->fetch_array(MYSQLI_BOTH)){
+    $C1="{ name:'".$filaC1['grupo']."', y:".$totalC1."},";
+}
+
+while($filaC2=$resC2->fetch_array(MYSQLI_BOTH)){
+    $C2="{ name:'".$filaC2['grupo']."', y:".$totalC2."},";
+}
+
+
+?>
+
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="x-UA-Compatible" content="ie-edge">
+	
+		
+		<title></title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--<script src="../code/highcharts.js"></script>-->
+
+<script src="../code/modules/exporting.js"></script>
+<script src="../code/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+		
+		<script type="text/javascript">
+// Build the chart
+$(function() { 
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    }, 
+    title: {
+        text: 'Grafica por carrera solicitada.'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false,
+                /////
+                format:'<br>{point.name}<br>: {point.percentage:.1f} %',
+                style:{
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'////
+            }
+            }// ,
+           ///showInLegend: true
+        }
+    },
+       exporting: {
+        url: 'http://export.highcharts.com/index-utf8-encode.php'
+},
+    series: [{
+        name: 'Carrera',
+        colorByPoint: true,
+        data: [
+            <?php 
+           
+//header('Content-Type: text/html; charset=utf-8');
+         echo '<meta charset="utf-8">';
+	echo'<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+	echo'<meta http-equiv="x-UA-Compatible" content="ie-edge">';
+            echo $A1;
+            echo $A2;
+            echo $B1;
+            echo $B2;
+            echo $C1;
+            echo $C2;
+            ?>
+          
+            
+            
+        ]
+    }]
+});
+    });
+		</script>
+	</head>
+	<body>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+
+
+	</body>
+</html>

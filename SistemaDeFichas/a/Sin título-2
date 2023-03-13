@@ -1,0 +1,60 @@
+<?php
+include("../ajax/conexion/conexion.php");
+$connect = mysqli_connect($HOST_NAME, $USER, $PASSWORD, $DATABASE);
+if ($connect == false) {
+			die("ERROR: Cold not connect. ".mysqli_connect_error());
+		} else {
+	
+	$sql = "select id,cicloescolar,fecha_exam,hora_exam,instrucciones, instrucciones2 from modificar";
+	//Validar la sentencia SELECT
+			if ($resul = mysqli_query($connect, $sql)) {
+				if (mysqli_num_rows($resul)>0) {
+					
+					echo "<table>";
+	
+					while ($row = mysqli_fetch_array($resul)) {
+					
+						echo "<tr>";
+							echo "<th>Num. </th>";
+							echo "<td>".$row['id']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+							echo "<th>C I C L O   E S C O L A R. </th>";
+							echo "<td>".$row['cicloescolar']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+							echo "<th>FECHA DEL EXAMEN.</th>";
+							echo "<td>".$row['fecha_exam']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+							echo "<th>HORA DEL EXAMEN.</th>";
+							echo "<td>".$row['hora_exam']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "<th>INTRUCCIONES.</th>";
+							echo "<td>".$row['instrucciones']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "<th>INTRUCCIONES 2.</th>";
+							echo "<td>".$row['instrucciones2']."</td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "<th>opcion.</th>";
+	echo "<td><a href='/Nueva carpeta/men.php#ajax/editardatosficha.php?_id=".$row['id']."&_cicloescolar=".$row['cicloescolar']."&_fecha_exam=".$row['fecha_exam']."&_hora_exam=".$row['hora_exam']."&_instrucciones=".$row['instrucciones']."&_instrucciones2=".$row['instrucciones2']."'>Editar</a></td>";
+						echo "</tr>";
+							
+							
+					}
+					echo "</table>";
+					//Liberar el resultado obtenido
+					mysqli_free_result($resul); 
+				}	
+			} else {
+				echo "Error, no records matching your query were found";
+			}
+	
+	}
+	//Cerra la conexión
+		mysqli_close($connect);
+
+?>

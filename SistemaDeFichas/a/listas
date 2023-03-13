@@ -1,0 +1,38 @@
+           
+        <ul class="nav">   
+                   <li> 
+                      <div class="row" >
+                      <a href="#"><img class="imagen"  width="32" height="32" src="../Nueva carpeta/img/insertaradmin.png"> nnnnnnnnnnnn servicios</a>
+                      </div>
+                         
+                      <ul> 
+                       <li>
+                         <!-- <div class="row" >-->
+                          <center>
+					        <p>
+                           <a href="ajax/insertar_DatosUser.php" class="ajax-link">
+							<!--<i class="fa fa-dashboard"></i>-->
+							<img class="imagen"  width="32" height="32" src="../Nueva carpeta/img/insertaradmin.png">   
+                     <font color="black"  face=""><span class="hidden-xs">Insertar Usuarios.</span></font>
+                        </a>
+                          </p>
+                         </center>
+                            <!--</div>-->
+                            </li>
+                            <br><br>
+                            <li>
+                                
+                               <center>
+					        <p>   
+                           <a href="ajax/insertar_DatosUser.php" class="ajax-link">
+							<!--<i class="fa fa-dashboard"></i>-->
+							<img class="imagen"  width="32" height="32" src="../Nueva carpeta/img/insertaradmin.png">   
+                     <font color="black"  face=""><span class="hidden-xs">Insertar Usuarios.</span></font>
+                        </a>
+                          </p>
+                         </center>
+                            <!--</div>-->
+                            </li>
+                        </ul>
+                    </li>              
+        </ul> 

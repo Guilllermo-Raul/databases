@@ -1,0 +1,152 @@
+
+<body>
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<form>
+					<div class="form-group">
+						<input type="search" placeholder="Buscar Registro...." class="form-control" id="search">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="contenedortabla" style="height:300px; overflow-y: scroll; background-color: #E0EEEE  ">		
+		<div class="row">
+			<div class="col-xs-12">
+				<table id="tblTable" class="table2" WIDTH="4500px" height="60px" >
+					<thead>
+						<tr  colspan="2" class="table-primary">
+					<th>bu</th>
+						<th><center>Fecha de expedición</center> </th> 
+							<th> Numero de ficha.</th>
+							<th>Nombre(s).</th>
+							<th>Apellido paterno.</th>
+							<th>Apellido materno.</th>
+                            <th>Fecha de Nacimiento.</th>
+                            <th><center>Curp.</center></th>
+                            <th>Estado.</th>
+                            <th>Municipio.</th>
+                            <th>Localidad.</th>
+                            <th>Calle.</th>
+                            <th>Colonia.</th>
+                            <th>CP.</th>
+							<th>Telefono.</th>
+							<th>Celular.</th>
+							<th>Correo.</th>
+							<th>Estado Civil.</th>
+							<th>Estado de Nacimiento.</th>
+							<th>Municipio de Nacimiento.</th>
+							<th>Primer Familiar.</th>
+							<th>Porcentaje</th>
+                            <th>Parentesco.</th>
+                            <th>Segundo Familiar.</th>
+                            <th>Porcentaje.</th>
+                            <th>Parentesco.</th>
+							<th>Tutor.</th>
+							<th>Num. Afiliación.</th>
+							<th>Clave de secundaria.</th>
+							<th>Escuela de Procedencia.</th>
+							<th>Promedio de secundaria.</th>
+							<th>Tipo de sangre.</th>
+							<th>Primera opción</th>
+							<th>Segunda opción</th>
+						    <th>Eliminar</th>    
+							<!--<th>pendiente</th>-->
+						 	</tr>
+					</thead>
+			<tbody>
+				<tr>
+						<?php
+include("../php/conexion/conexion.php");
+//Crear conexión al SGDB MySQL
+		
+
+$connect = mysqli_connect($HOST_NAME, $USER, $PASSWORD, $DATABASE);
+//Verificar conexión
+		if ($connect == false) {
+			die("ERROR: Cold not connect. ".mysqli_connect_error());
+		} else {
+	$sql = "select fecha_actual, no_ficha, nombre, Apaterno, Amaterno, fecha_nac, curp, estado, municipio, localidad, calle, colonia, cp, tel, cel, correo, estd_civil, estd_nac, mpio_nac, prim_fam, prim_porce, prim_parentesco, seg_fam, seg_porce, seg_parentesco, tutor, no_afil, clave_sec, esc_proce, prom_sec, tipo_sangre,
+   prim_op, seg_op from fichas";
+	//Validar la sentencia SELECT
+			if ($resul = mysqli_query($connect, $sql)) {
+				if (mysqli_num_rows($resul)>0) {
+					
+				
+					while ($row = mysqli_fetch_array($resul)) {
+						echo "<tr  >";
+                           echo "<td>"."</td>";
+						echo "<td >".$row['fecha_actual']."</td>";
+							echo "<td >".$row['no_ficha']."</td>";
+							echo "<td>".$row['nombre']."</td>";
+							echo "<td>".$row['Apaterno']."</td>";
+							echo "<td>".$row['Amaterno']."</td>";
+                            echo "<td>".$row['fecha_nac']."</td>";
+                            echo "<td>".$row['curp']."</td>";
+                            echo "<td>".$row['estado']."</td>";
+                            echo "<td>".$row['municipio']."</td>";
+                            echo "<td>".$row['localidad']."</td>";
+                            echo "<td>".$row['calle']."</td>";
+                            echo "<td>".$row['colonia']."</td>";
+                            echo "<td>".$row['cp']."</td>";
+							echo "<td>".$row['tel']."</td>";
+							echo "<td>".$row['cel']."</td>";
+							echo "<td>".$row['correo']."</td>";
+                            echo "<td>".$row['estd_civil']."</td>";
+                            echo "<td>".$row['estd_nac']."</td>"; 
+							echo "<td>".$row['mpio_nac']."</td>";
+                            echo "<td>".$row['prim_fam']."</td>";
+                            echo "<td>".$row['prim_porce']."</td>";
+                            echo "<td>".$row['prim_parentesco']."</td>";
+                        
+                            echo "<td>".$row['seg_fam']."</td>";
+                            echo "<td>".$row['seg_porce']."</td>";
+                            echo "<td>".$row['seg_parentesco']."</td>";
+                        
+                            echo "<td>".$row['tutor']."</td>";
+                            echo "<td>".$row['no_afil']."</td>";
+                            echo "<td>".$row['clave_sec']."</td>";
+                            
+                            echo "<td>".$row['esc_proce']."</td>";
+                            echo "<td>".$row['prom_sec']."</td>";
+                           
+                             echo "<td>".$row['tipo_sangre']."</td>";
+							echo "<td>".$row['prim_op']."</td>";
+							echo "<td>".$row['seg_op']."</td>";
+							echo "<td ><a class='btn btn-danger' href='../SistemaDeFichas/php/eliminarfichauser.php?_no_ficha=".$row['no_ficha']."'>Eliminar</a></td>";
+							//echo "<td><a href='verdatosporregistro.php?_no_ficha=".$row['no_ficha']."'>ver registro com</a></td>";
+                        
+						echo "</tr>";
+                        echo "<br>";
+					}
+					//echo "</table>";
+					//Liberar el resultado obtenido
+					mysqli_free_result($resul); 
+				}	
+			} else {
+				echo "Error, no records matching your query were found";
+			}
+	
+		
+		
+		}
+	//Cerra la conexión
+		mysqli_close($connect);
+?>
+				</tr>																												
+			</tbody>
+
+				</table>
+			</div>
+		
+		</div>
+ </div>
+		
+	<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.searchable.js"></script>
+	<script type="text/javascript" src="js/codigo_script.js"></script>
+	</div>
+</body>
+

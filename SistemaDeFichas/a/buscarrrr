@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="x-UA-Compatible" content="ie-edge">
+
+	<title>registros fichas.</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/Estilos_Tabla2.css">
+</head>
+<body>
+<style  type="text/css">
+    .tabla{
+    background: #d65757;
+    background-color: #d65757; 
+}
+    </style>  
+    
+		
+			<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<form>
+					<div class="form-group">
+					    <div class="col-sm-12">
+						<input type="search" id="container-search" placeholder="Buscar...." class="form-control">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+			<div class="container" id="searchable-container">
+		<table id="tblTable" class="table">
+                    <th colspan="14" class="table-primary"><center><h4>Aspirantes.</h4></center></th>
+						<tr  colspan="2" class="table-secondary">
+							<th>fecha de expedición</th>
+							<th> Numero de ficha.</th>
+							<th>Nombre</th>
+							<th>Apellido paterno</th>
+							<th>Apellido materno</th>
+							<th>Telefono</th>
+							<th>Celular</th>
+							<th>Correo</th>
+							<th>Tutor</th>
+							<th>Escuela de procedencia.</th>
+							<th>Primera opción</th>
+							<th>Segunda opción</th>
+						    <th>Ver regitro completo</th>     
+							<th>pendiente</th>
+						 	</tr>
+                       
+	<tbody>
+	<?php
+include("../ajax/conexion/conexion.php");
+//Crear conexión al SGDB MySQL
+		
+
+$connect = mysqli_connect($HOST_NAME, $USER, $PASSWORD, $DATABASE);
+//Verificar conexión
+		if ($connect == false) {
+			die("ERROR: Cold not connect. ".mysqli_connect_error());
+		} else {
+	$sql = "select fecha_actual, no_ficha,nombre,Apaterno,Amaterno,tel,cel,correo,tutor,esc_proce,prim_op,seg_op from fichas";
+	//Validar la sentencia SELECT
+			if ($resul = mysqli_query($connect, $sql)) {
+				if (mysqli_num_rows($resul)>0) {
+					
+				
+					while ($row = mysqli_fetch_array($resul)) {
+						echo "<tr>";
+							echo "<td>".$row['fecha_actual']."</td>";
+							echo "<td>".$row['no_ficha']."</td>";
+							echo "<td>".$row['nombre']."</td>";
+							echo "<td>".$row['Apaterno']."</td>";
+							echo "<td>".$row['Amaterno']."</td>";
+							echo "<td>".$row['tel']."</td>";
+							echo "<td>".$row['cel']."</td>";
+							echo "<td>".$row['correo']."</td>";
+							echo "<td>".$row['tutor']."</td>";
+							echo "<td>".$row['esc_proce']."</td>";
+							echo "<td>".$row['prim_op']."</td>";
+							echo "<td>".$row['seg_op']."</td>";
+							echo "<td><a href='verdatosporregistro.php?_no_ficha=".$row['no_ficha']."'>ver registro com</a></td>";
+							echo "<td><a href='verdatosporregistro.php?_no_ficha=".$row['no_ficha']."'>ver registro com</a></td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+					//Liberar el resultado obtenido
+					mysqli_free_result($resul); 
+				}	
+			} else {
+				echo "Error, no records matching your query were found";
+			}
+	
+		
+		
+		}
+	//Cerra la conexión
+		mysqli_close($connect);
+?>
+	</tbody>
+</table>	
+	</div>
+	
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.searchable.js"></script>
+	<script type="text/javascript" src="js/codigo_script.js"></script>
+
+</body>
+</html>
