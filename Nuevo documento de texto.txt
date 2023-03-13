@@ -1,0 +1,87 @@
+CREATE DATABASE peliculas;
+use peliculas;
+/*drop database peliculas;
+*/
+create table cliente
+(
+	claveCliente int primary key,
+    nombreCliente varchar(45),
+    apellidoCliente varchar(45)
+);
+
+create table pelicula(
+claveP varchar(45) primary key,
+nombrePelicula varchar(45)
+);
+
+create table fechaRenta(
+fechaPrestamo date,
+fechaDevolucion date,
+claveCliente int,
+claveP varchar(45) ,
+constraint claveCliente foreign key (claveCliente) references cliente(claveCliente),
+constraint claveP foreign key (claveP) references pelicula(claveP)
+);
+
+create table genero(
+claveGen int primary key,
+nombreGen varchar(45)
+);
+
+
+create table productora(
+claveProductora int primary key,
+nombreProductora varchar(45)
+);
+
+
+
+/*////////////////////////////*/
+create table pertenece(
+claveP varchar(45) ,
+claveGen int,
+foreign key (claveP) references pelicula(claveP),
+foreign key (claveGen) references genero(claveGen)
+);
+
+create table tener(
+claveP varchar(45),
+claveProductora int,
+foreign key (claveP) references pelicula(claveP),
+foreign key (claveProductora) references productora(claveProductora)
+);
+
+
+insert into cliente (claveCliente, nombreCliente, apellidoCliente) values(1, "Carmen", "Guzman");
+insert into cliente (claveCliente, nombreCliente, apellidoCliente) values(2, "Luis", "Aguilar");
+insert into cliente (claveCliente, nombreCliente, apellidoCliente) values(3, "Ubalda", "Moreno");
+insert into cliente (claveCliente, nombreCliente, apellidoCliente) values(4, "Cinthya", "Diaz");
+
+insert into pelicula (claveP, nombrePelicula) values ("P10", "Avengers: Infinity War");
+insert into pelicula (claveP, nombrePelicula) values ("P20", "Roma");
+insert into pelicula (claveP, nombrePelicula) values ("P30", "Los Increibles 2");
+insert into pelicula (claveP, nombrePelicula) values ("P40", "Venom");
+
+insert into productora (claveProductora, nombreProductora) values(1, "Marvel Studios");
+insert into productora (claveProductora, nombreProductora) values(2, "Participant Media");
+insert into productora (claveProductora, nombreProductora) values(3, "Walt Disney picture");
+insert into productora (claveProductora, nombreProductora) values(4, "Pixar Animation Studios");
+insert into productora (claveProductora, nombreProductora) values(5, "Columbia Picture");
+
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-10',  '2019-02-1', 1, "P10");
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-12',  '2019-02-15', 2, "P20");
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-12',  '2019-02-15', 3, "P30");
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-13',  '2019-02-16', 4, "P40");
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-14',  '2019-02-17',1, "P20");
+insert into fechaRenta (fechaPrestamo, fechaDevolucion, claveCliente, claveP) values ('2019-02-17',  '2019-02-20', 4, "P30");
+
+insert into genero (claveGen, nombreGen) values (1, "Ciencia Ficciòn");
+insert into genero (claveGen, nombreGen) values (2, "Accion");
+insert into genero (claveGen, nombreGen) values (3, "Drama");
+insert into genero (claveGen, nombreGen) values (4, "Animacion");
+
+
+select* from pelicula where claveP="P40";
+use peliculas;
+select  nombreCliente, apellidoCliente from cliente  INNER JOIN fecharenta WHERE fecharenta.claveP="P40";
+
